@@ -1,0 +1,21 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: config-service
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          searchLocations:
+            classpath:config/user-service/,
+            classpath:config/zuul-service/,
+        encrypt.enabled: false
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:9000/eureka/

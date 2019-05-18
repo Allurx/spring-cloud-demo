@@ -1,0 +1,19 @@
+zuul:
+  routes:
+    user-service:
+      path: /user-service/**
+      service-id: user-service
+  prefix: /api
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 120000
+#ribbonTimeout = (ReadTimeout + ConnectTimeout) * (maxAutoRetries + 1) * (maxAutoRetriesNextServer + 1);
+ribbon:
+  ConnectTimeout: 30000           #ribbon 连接超时时长
+  ReadTimeout: 30000              #ribbon 读取超时时长
+  MaxAutoRetries: 1               #当前服务重试次数
+  MaxAutoRetriesNextServer: 0     #切换服务重试次数

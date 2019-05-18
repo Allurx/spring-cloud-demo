@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+
+    <contextName>zuul-service</contextName>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <property name="logName" value="zuul-service"/>
+    <property name="logPath" value="/spring-cloud-demo-log/${logName}/"/>
+    <property name="consoleLogPattern" value="%blue([%contextName]) --- ${CONSOLE_LOG_PATTERN}"/>
+    <property name="fileLogPattern" value="[%contextName] --- ${FILE_LOG_PATTERN}"/>
+
+    <!-- 控制台 -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>${consoleLogPattern}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 日志文件 -->
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>${fileLogPattern}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${logPath}%d{yyyy-MM-dd}/${logName}.%i.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <maxFileSize>5MB</maxFileSize>
+        </rollingPolicy>
+    </appender>
+
+    <springProfile name="default,dev,test">
+        <logger name="com.zyc" level="debug"/>
+    </springProfile>
+
+    <springProfile name="prod">
+        <logger name="com.zyc" level="error"/>
+    </springProfile>
+
+    <root level="info">
+        <appender-ref ref="console"/>
+        <appender-ref ref="file"/>
+    </root>
+
+</configuration>
