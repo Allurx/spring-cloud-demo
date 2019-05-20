@@ -11,18 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
 
 /**
- * feign请求配置
+ * 转发feign请求头
  *
  * @author zyc
  */
 @Configuration
 public class FeignHeaderConfig implements RequestInterceptor {
 
-    /**
-     * 转发feign请求头
-     *
-     * @param template
-     */
     @Override
     public void apply(RequestTemplate template) {
         // 当Hystrix熔断策略为THREAD时，requestAttributes为null
