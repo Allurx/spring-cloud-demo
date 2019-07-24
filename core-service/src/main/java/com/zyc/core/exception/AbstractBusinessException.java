@@ -15,10 +15,6 @@ public abstract class AbstractBusinessException extends RuntimeException {
 
     protected ResponseMessage responseMessage;
 
-    public AbstractBusinessException() {
-        this(ResponseMessage.INTERNAL_SERVER_ERROR);
-    }
-
     AbstractBusinessException(ResponseMessage responseMessage) {
         super(responseMessage.getMessage());
         this.responseMessage = responseMessage;
