@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
+import java.util.Objects;
 
 /**
  * @author zyc
@@ -59,7 +60,7 @@ public class GlobalExceptionHandler {
         BindingResult bindingResult = exception.getBindingResult();
         FieldError error = bindingResult.getFieldError();
         log.error(exception.getMessage(), exception);
-        return ResponseResult.fail(error);
+        return ResponseResult.fail(Objects.requireNonNull(error));
     }
 
     @ExceptionHandler(BindException.class)
@@ -67,7 +68,7 @@ public class GlobalExceptionHandler {
         BindingResult bindingResult = exception.getBindingResult();
         FieldError error = bindingResult.getFieldError();
         log.error(exception.getMessage(), exception);
-        return ResponseResult.fail(error);
+        return ResponseResult.fail(Objects.requireNonNull(error));
     }
 
     /**
