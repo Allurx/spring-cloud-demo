@@ -1,6 +1,5 @@
 package com.zyc.zuul.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.netflix.zuul.filters.Route;
 import org.springframework.cloud.netflix.zuul.filters.discovery.DiscoveryClientRouteLocator;
 import org.springframework.context.annotation.Configuration;
@@ -26,8 +25,11 @@ public class SwaggerSummaryConfig implements SwaggerResourcesProvider {
 
     private static final String SEPARATOR = "/api/";
 
-    @Autowired
-    private DiscoveryClientRouteLocator routeLocator;
+    private final DiscoveryClientRouteLocator routeLocator;
+
+    public SwaggerSummaryConfig(DiscoveryClientRouteLocator routeLocator) {
+        this.routeLocator = routeLocator;
+    }
 
     @Override
     public List<SwaggerResource> get() {
