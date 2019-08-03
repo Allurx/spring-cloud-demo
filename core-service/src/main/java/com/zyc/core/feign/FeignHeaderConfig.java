@@ -20,7 +20,6 @@ public class FeignHeaderConfig implements RequestInterceptor {
 
     @Override
     public void apply(RequestTemplate template) {
-        // 当Hystrix熔断策略为Thread时,requestAttributes为null
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
         if (requestAttributes == null) {
             return;
